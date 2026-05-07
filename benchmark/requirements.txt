@@ -1,0 +1,7 @@
+torch
+transformers
+accelerate
+numpy
+tqdm
+datasets
+bitsandbytes; platform_system != "Windows"

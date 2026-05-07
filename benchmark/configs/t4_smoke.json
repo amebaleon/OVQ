@@ -1,0 +1,80 @@
+{
+  "benchmark_name": "nexus_ovq_t4_smoke",
+  "model_id": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+  "dtype": "float16",
+  "seed": 42,
+  "output_dir": "outputs/t4_smoke",
+  "max_sequence_length": 128,
+  "ppl_max_length": 128,
+  "ppl_stride": 128,
+  "ppl_max_batches": 8,
+  "generation_max_new_tokens": 32,
+  "generation_repeats": 1,
+  "use_chat_template_for_generation": true,
+  "target_modules": [
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj",
+    "gate_proj",
+    "up_proj",
+    "down_proj"
+  ],
+  "layers": "all",
+  "block_size": 16,
+  "overlap_ratio": 0.5,
+  "overlap_weight": "uniform",
+  "sensitivity_ranking": [1, 3, 8, 0, 10, 15, 14, 13, 12, 11],
+  "methods": [
+    {
+      "name": "fp16_reference",
+      "kind": "reference"
+    },
+    {
+      "name": "vq_2bit",
+      "kind": "vq",
+      "bits": 2
+    },
+    {
+      "name": "ovq_2bit",
+      "kind": "ovq",
+      "bits": 2
+    },
+    {
+      "name": "mixed_ovq_top2_4bit",
+      "kind": "mixed_ovq",
+      "base_bits": 2,
+      "protected_bits": 4,
+      "top_k": 2
+    },
+    {
+      "name": "mixed_ovq_top4_4bit",
+      "kind": "mixed_ovq",
+      "base_bits": 2,
+      "protected_bits": 4,
+      "top_k": 4
+    }
+  ],
+  "eval_prompts": [
+    "The capital of France is",
+    "Artificial intelligence is",
+    "Python is a",
+    "The future of medicine will",
+    "In a small village near the mountains"
+  ],
+  "generation_prompts": [
+    "Explain why quantization is useful for running language models on small GPUs.",
+    "Write a short answer about why privacy matters in on-premise AI.",
+    "Give three practical risks when compressing a language model."
+  ],
+  "ppl_texts": [
+    "Language models are neural networks trained to predict text. Quantization reduces the memory needed to store their weights, but aggressive quantization can damage the model's internal representations.",
+    "A useful compression method must preserve quality, reduce memory, and keep inference fast enough for practical deployment.",
+    "Mixed precision quantization assigns more bits to sensitive layers and fewer bits to layers that tolerate stronger compression."
+  ],
+  "optional_baselines": {
+    "bitsandbytes_nf4": false,
+    "gptq": false,
+    "awq": false
+  }
+}

@@ -1,0 +1,4 @@
+baseline,status,reason
+bitsandbytes_nf4,not_implemented_in_v1,v1 records OVQ/VQ quality gate first; add real external baseline adapter before using for claims
+gptq,disabled,disabled in config
+awq,disabled,disabled in config

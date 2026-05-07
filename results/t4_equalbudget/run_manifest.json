@@ -1,0 +1,13 @@
+{
+  "benchmark_name": "nexus_ovq_t4_equalbudget",
+  "config_path": "/content/nexus_ovq_due_diligence_v1/configs/t4_equalbudget.json",
+  "model_id": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+  "dtype": "float16",
+  "python": "3.12.13",
+  "platform": "Linux-6.6.113+-x86_64-with-glibc2.35",
+  "device": "Tesla T4",
+  "cuda_total_gb": 14.56317138671875,
+  "torch": "2.10.0+cu128",
+  "runtime_label": "fake_dequant_runtime_for_vq_ovq_methods",
+  "created_unix": 1778073174.1942463
+}
